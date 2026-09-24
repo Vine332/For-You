@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Will You Choose Me? 💗</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap');
+
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{
+  font-family:"Noto Sans Myanmar","Myanmar Text",sans-serif;
+  background:linear-gradient(145deg,#fff8fc 0%,#ffeaf3 48%,#ffd8e8 100%);
+  color:#793651;
+}
+.page{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  padding:16px;position:relative;overflow:hidden;
+}
+.card{
+  width:min(100%,430px);
+  height:min(760px,calc(100dvh - 32px));
+  min-height:540px;
+  padding:24px 18px 20px;
+  border-radius:30px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 20px 55px rgba(165,65,108,.16);
+  backdrop-filter:blur(16px);
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;
+  position:relative;z-index:5;
+  overflow:hidden;
+}
+.sticker{
+  width:min(210px,55vw);height:min(170px,24vh);
+  display:flex;align-items:center;justify-content:center;
+  transition:.3s;
+}
+.sticker svg{width:100%;height:100%;filter:drop-shadow(0 10px 12px rgba(160,50,95,.13))}
+.question{
+  width:100%;max-width:390px;
+  margin:8px 0 6px;
+  font-size:clamp(20px,5.5vw,29px);
+  line-height:1.65;
+  font-weight:700;
+  color:#873957;
+  word-break:keep-all;
+}
+.sub{
+  margin:2px 0 14px;
+  font-size:13px;color:#a36b82;line-height:1.7;
+}
+.message{
+  min-height:42px;width:100%;padding:0 8px;
+  font-size:clamp(15px,4.2vw,19px);
+  line-height:1.65;font-weight:600;color:#b4416c;
+  transition:.2s;
+}
+.fade{opacity:0;filter:blur(3px);transform:translateY(5px)}
+.buttons{
+  width:100%;display:flex;gap:10px;align-items:center;justify-content:center;
+  margin-top:12px;min-height:72px;
+}
+button{
+  border:0;font-family:inherit;font-weight:700;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+#yesBtn{
+  flex:1;background:linear-gradient(135deg,#ff70aa,#ee3c83);
+  color:white;border-radius:20px;padding:15px 8px;
+  font-size:clamp(13px,3.7vw,16px);
+  box-shadow:0 12px 26px rgba(238,60,131,.25);
+  transform-origin:center;
+  white-space:nowrap;
+}
+#noBtn{
+  flex:1;background:white;color:#9c4d6c;
+  border:1px solid #f2ccdc;border-radius:20px;padding:15px 7px;
+  font-size:clamp(12px,3.5vw,15px);
+  white-space:nowrap;
+}
+.hint{font-size:11px;color:#bd8b9e;margin-top:16px}
+.no-copy{transition:.2s}
+.spark{position:fixed;pointer-events:none;z-index:30;font-size:20px;animation:spark 1s forwards}
+@keyframes spark{0%{opacity:0;transform:scale(.3)}25%{opacity:1}100%{opacity:0;transform:translateY(-55px) scale(1.2)}}
+
+/* final */
+.final{
+  position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
+  padding:22px;background:linear-gradient(145deg,#fff9fc,#ffe5ef 55%,#ffd1e3);
+  text-align:center;overflow:hidden;
+}
+.final.show{display:flex;animation:appear .7s ease}
+.final-box{position:relative;z-index:4;width:min(100%,500px)}
+.final-sticker{width:min(230px,62vw);height:180px;margin:auto}
+.final-sticker svg{width:100%;height:100%;filter:drop-shadow(0 14px 14px rgba(180,50,100,.15))}
+.love-title{
+  margin:4px 0 10px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;font-weight:700;
+  font-size:clamp(39px,11vw,66px);
+  color:#ed3f83;line-height:1.15;
+}
+.final-text{
+  font-size:clamp(15px,4.3vw,21px);line-height:2;
+  font-weight:600;color:#7d3855;
+}
+.final-text b{color:#ed3f83}
+.restart{
+  margin-top:17px;padding:9px 17px;border-radius:18px;
+  background:rgba(255,255,255,.8);color:#a24c6c;border:1px solid #f1cede;
+  font-size:12px;
+}
+
+/* real vector roses, not emoji */
+.rose{
+  position:fixed;bottom:-80px;width:42px;height:70px;z-index:3;
+  pointer-events:none;animation:rise var(--time) linear forwards;
+}
+.rose svg{width:100%;height:100%;filter:drop-shadow(0 6px 7px rgba(130,45,75,.15))}
+@keyframes rise{
+  0%{transform:translate3d(0,0,0) rotate(-8deg) scale(.75);opacity:0}
+  10%{opacity:1}
+  100%{transform:translate3d(var(--drift),-115vh,0) rotate(22deg) scale(1);opacity:0}
+}
+@keyframes appear{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+
+@media(max-height:650px){
+  .card{padding-top:12px;padding-bottom:12px}
+  .sticker{height:125px}
+  .question{font-size:20px}
+  .sub{margin-bottom:7px}
+  .buttons{margin-top:5px}
+  .hint{margin-top:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <main class="card" id="card">
+    <div class="sticker" id="sticker"></div>
+
+    <div class="question">
+      ငါ့ရည်းစားဖြစ်ပေးနိုင်မလား?<br>
+      ပြန်ချစ်ပေးနိုင်မလား? 🥺
+    </div>
+
+    <div class="sub">အဖြေကို သေချာလေးရွေးပေးနော်… 💕</div>
+    <div class="message" id="message">ဟင်… တကယ်ပဲ မရွေးပေးတော့ဘူးလား? 🥺💔</div>
+
+    <div class="buttons">
+      <button id="yesBtn">သေချာတာပေါ့ရှင့်... 💕</button>
+      <button id="noBtn">မသေချာသေးဘူးရှင့်..</button>
+    </div>
+    <div class="hint">တစ်ခုကိုပဲ ရွေးရမယ်နော် 🤭</div>
+  </main>
+</div>
+
+<section class="final" id="final">
+  <div class="final-box">
+    <div class="final-sticker" id="finalSticker"></div>
+    <div class="love-title">Love You So Much</div>
+    <div class="final-text">
+      ပျော်လိုက်တာဗျာ… 🥹💕<br>
+      ကိုယ့်ဘဝမှာ <b>မင်းလေးကို</b> ရွေးချယ်ခဲ့တာ<br>
+      နောက်ဆုံးတော့ ရပြီကွ… 🤭💗
+    </div>
+    <button class="restart" onclick="location.reload()">အစကနေ ပြန်ကြည့်မယ် ↻</button>
+  </div>
+</section>
+
+<script>
+const sticker=document.getElementById("sticker");
+const finalSticker=document.getElementById("finalSticker");
+const message=document.getElementById("message");
+const yes=document.getElementById("yesBtn");
+const no=document.getElementById("noBtn");
+const card=document.getElementById("card");
+const final=document.getElementById("final");
+
+function stickerSVG(type){
+  const faces={
+    happy:`<svg viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="110" cy="91" rx="62" ry="52" fill="#fff" stroke="#333" stroke-width="5"/>
+      <path d="M55 67Q30 50 27 75Q25 92 52 91" fill="#fff" stroke="#333" stroke-width="5"/>
+      <path d="M165 67Q190 50 193 75Q195 92 168 91" fill="#fff" stroke="#333" stroke-width="5"/>
+      <circle cx="88" cy="88" r="6"/><circle cx="132" cy="88" r="6"/>
+      <path d="M102 103Q110 111 118 103" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="72" cy="101" r="7" fill="#ff9dbb" opacity=".7"/><circle cx="148" cy="101" r="7" fill="#ff9dbb" opacity=".7"/>
+      <path d="M91 119Q110 95 129 119Q110 143 91 119Z" fill="#ff4f8b"/>
+      <text x="110" y="32" text-anchor="middle" font-size="20">♡ ♡</text>
+    </svg>`,
+    sad:`<svg viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="110" cy="91" rx="62" ry="52" fill="#f9fbff" stroke="#536072" stroke-width="5"/>
+      <path d="M58 68Q35 48 28 75Q27 93 52 91" fill="#f9fbff" stroke="#536072" stroke-width="5"/>
+      <path d="M162 68Q185 48 192 75Q193 93 168 91" fill="#f9fbff" stroke="#536072" stroke-width="5"/>
+      <circle cx="88" cy="87" r="6" fill="#334155"/><circle cx="132" cy="87" r="6" fill="#334155"/>
+      <path d="M94 111Q110 97 126 111" fill="none" stroke="#536072" stroke-width="4" stroke-linecap="round"/>
+      <path d="M77 90C67 105 69 119 77 126" fill="none" stroke="#5eb9ff" stroke-width="6" stroke-linecap="round"/>
+      <path d="M143 90C153 105 151 119 143 126" fill="none" stroke="#5eb9ff" stroke-width="6" stroke-linecap="round"/>
+      <path d="M87 67L78 60M133 67L142 60" stroke="#536072" stroke-width="4" stroke-linecap="round"/>
+    </svg>`,
+    cry:`<svg viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="110" cy="90" rx="65" ry="55" fill="#fff" stroke="#4b5563" stroke-width="5"/>
+      <path d="M58 68Q35 45 27 73Q27 94 53 91" fill="#fff" stroke="#4b5563" stroke-width="5"/>
+      <path d="M162 68Q185 45 193 73Q193 94 167 91" fill="#fff" stroke="#4b5563" stroke-width="5"/>
+      <path d="M81 84Q89 78 97 84" fill="none" stroke="#374151" stroke-width="5" stroke-linecap="round"/>
+      <path d="M123 84Q131 78 139 84" fill="none" stroke="#374151" stroke-width="5" stroke-linecap="round"/>
+      <path d="M92 108Q110 122 128 108" fill="none" stroke="#374151" stroke-width="5" stroke-linecap="round"/>
+      <path d="M73 94C62 108 66 125 75 133" fill="none" stroke="#4db8ff" stroke-width="7" stroke-linecap="round"/>
+      <path d="M147 94C158 108 154 125 145 133" fill="none" stroke="#4db8ff" stroke-width="7" stroke-linecap="round"/>
+      <text x="110" y="30" text-anchor="middle" font-size="18">💔</text>
+    </svg>`,
+    love:`<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+      <path d="M120 151C76 119 48 96 48 63C48 38 78 28 96 48C105 58 110 67 120 77C130 67 135 58 144 48C162 28 192 38 192 63C192 96 164 119 120 151Z" fill="#ff5b98" stroke="#b52d63" stroke-width="4"/>
+      <circle cx="96" cy="83" r="5"/><circle cx="144" cy="83" r="5"/>
+      <path d="M104 103Q120 116 136 103" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+      <path d="M70 35L58 22M170 35L182 22" stroke="#ff5b98" stroke-width="5" stroke-linecap="round"/>
+      <text x="120" y="27" text-anchor="middle" font-size="20">♥ ♥ ♥</text>
+    </svg>`
+  };
+  return faces[type] || faces.happy;
+}
+
+let count=0;
+const stages=[
+  ["sad","စဉ်းစားပါနော် 🥺💔"],
+  ["sad","သေချာပြန်စဉ်းစားပါဦးးး 🥺"],
+  ["cry","တကယ်ပြန်မချစ်နိုင်တော့ဘူးလား… 🥺💔"],
+  ["cry","နောက်တစ်ခါလောက် စဉ်းစားပေးပါနော်… 🥹"],
+  ["cry","ဟင်… တကယ်ပဲ မရဘူးလား 🥺💔"]
+];
+
+sticker.innerHTML=stickerSVG("sad");
+
+no.onclick=()=>{
+  count++;
+  const s=stages[Math.min(count-1,stages.length-1)];
+  sticker.innerHTML=stickerSVG(s[0]);
+  message.classList.add("fade");
+  setTimeout(()=>{message.textContent=s[1];message.classList.remove("fade")},180);
+
+  const scale=Math.min(1 + count*.18,1.95);
+  yes.style.transform=`scale(${scale})`;
+  yes.style.zIndex=10;
+  no.style.transform=`scale(${Math.max(.78,1-count*.045)})`;
+  burst(no);
+};
+
+function burst(el){
+  const r=el.getBoundingClientRect();
+  for(let i=0;i<3;i++){
+    const x=document.createElement("div");
+    x.className="spark";
+    x.textContent=i===0?"♡":"✦";
+    x.style.left=(r.left+r.width/2+Math.random()*60-30)+"px";
+    x.style.top=(r.top+r.height/2)+"px";
+    document.body.appendChild(x);
+    setTimeout(()=>x.remove(),1000);
+  }
+}
+
+yes.onclick=()=>{
+  finalSticker.innerHTML=stickerSVG("love");
+  final.classList.add("show");
+  card.style.display="none";
+  startRoses();
+};
+
+function roseSVG(){
+ return `<svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+   <path d="M30 50C30 65 28 77 30 88" stroke="#4f9a52" stroke-width="5" fill="none" stroke-linecap="round"/>
+   <path d="M29 72Q13 61 10 73Q21 78 29 77" fill="#5fae61"/>
+   <path d="M31 65Q48 55 50 68Q41 72 31 71" fill="#5fae61"/>
+   <path d="M30 51C12 48 12 28 26 25C19 10 43 9 37 25C54 26 51 48 30 51Z" fill="#ef477f"/>
+   <path d="M30 47C22 42 19 34 25 30C20 23 32 18 37 25C45 30 39 43 30 47Z" fill="#ff719f"/>
+   <path d="M30 41C26 37 27 31 33 29C39 32 37 38 30 41Z" fill="#e93d77"/>
+ </svg>`;
+}
+
+function makeRose(i){
+  const d=document.createElement("div");
+  d.className="rose";
+  d.innerHTML=roseSVG();
+  d.style.left=(5+Math.random()*90)+"vw";
+  d.style.setProperty("--drift",(Math.random()*180-90)+"px");
+  d.style.setProperty("--time",(5.5+Math.random()*2.5)+"s");
+  d.style.animationDelay=(i*.55)+"s";
+  d.style.transform=`scale(${.7+Math.random()*.5})`;
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),9000);
+}
+function startRoses(){
+  // A small, continuous stream — not a wall of flowers.
+  for(let i=0;i<9;i++) makeRose(i);
+  setInterval(()=>{
+    if(final.classList.contains("show")) makeRose(Math.random()*2);
+  },900);
+}
+</script>
+</body>
+</html>
